@@ -1,0 +1,471 @@
+@import "tailwindcss";
+
+/* Tema azul cielo: reglas de color compartidas para toda la interfaz. */
+body:not(.high-contrast-mode) .sky-theme [class*="bg-indigo-"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-violet-"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-cyan-"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-amber-"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-blue-"] {
+  background-color: #e0f2fe !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme button[class*="bg-indigo-"],
+body:not(.high-contrast-mode) .sky-theme button[class*="bg-violet-"],
+body:not(.high-contrast-mode) .sky-theme button[class*="bg-cyan-"],
+body:not(.high-contrast-mode) .sky-theme button[class*="bg-amber-"],
+body:not(.high-contrast-mode) .sky-theme button[class*="bg-blue-"] {
+  background-color: #0284c7 !important;
+  border-color: #0284c7 !important;
+  color: #ffffff !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="text-indigo-"],
+body:not(.high-contrast-mode) .sky-theme [class*="text-violet-"],
+body:not(.high-contrast-mode) .sky-theme [class*="text-cyan-"],
+body:not(.high-contrast-mode) .sky-theme [class*="text-amber-"],
+body:not(.high-contrast-mode) .sky-theme [class*="text-blue-"] {
+  color: #0369a1 !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="border-indigo-"],
+body:not(.high-contrast-mode) .sky-theme [class*="border-violet-"],
+body:not(.high-contrast-mode) .sky-theme [class*="border-cyan-"],
+body:not(.high-contrast-mode) .sky-theme [class*="border-amber-"],
+body:not(.high-contrast-mode) .sky-theme [class*="border-blue-"] {
+  border-color: #7dd3fc !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#0B192C]"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#070F1E]"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#112240]"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#0F1D36]"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#1E3A5F]"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#1B3A60]"],
+body:not(.high-contrast-mode) .sky-theme [style*="#0B192C"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(11, 25, 44)"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(7, 15, 30)"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(17, 34, 64)"] {
+  background-color: #f0f9ff !important;
+  border-color: #bae6fd !important;
+  color: #0c4a6e !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#0B192C]"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#070F1E]"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#112240]"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#0F1D36]"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#1E3A5F]"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#1B3A60]"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [style*="#0B192C"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(11, 25, 44)"] [class*="text-white"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(7, 15, 30)"] [class*="text-white"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(17, 34, 64)"] [class*="text-white"] {
+  color: #0c4a6e !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(11, 25, 44)"] [class*="text-slate-200"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(11, 25, 44)"] [class*="text-slate-300"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(7, 15, 30)"] [class*="text-slate-200"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(7, 15, 30)"] [class*="text-slate-300"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(17, 34, 64)"] [class*="text-slate-200"],
+body:not(.high-contrast-mode) .sky-theme [style*="rgb(17, 34, 64)"] [class*="text-slate-300"] {
+  color: #334155 !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#FACC15]"] {
+  background-color: #bae6fd !important;
+  color: #0c4a6e !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme button[class*="bg-[#FACC15]"] {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#00FFFF]"] {
+  background-color: #7dd3fc !important;
+  color: #0c4a6e !important;
+}
+
+body:not(.high-contrast-mode) .support-light button[style*="rgb(250, 204, 21)"],
+body:not(.high-contrast-mode) .support-light button[style*="rgb(0, 255, 255)"] {
+  background-color: #0284c7 !important;
+  border-color: #0284c7 !important;
+  color: #ffffff !important;
+}
+
+body:not(.high-contrast-mode) .support-light [class*="text-white"],
+body:not(.high-contrast-mode) .support-light [class*="text-slate-200"],
+body:not(.high-contrast-mode) .support-light [class*="text-slate-300"],
+body:not(.high-contrast-mode) .support-light [class*="text-slate-400"] {
+  color: #334155 !important;
+}
+
+body:not(.high-contrast-mode) .support-light button[style*="rgb(250, 204, 21)"],
+body:not(.high-contrast-mode) .support-light button[style*="rgb(0, 255, 255)"] {
+  color: #ffffff !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="text-[#00FFFF]"],
+body:not(.high-contrast-mode) .sky-theme [class*="text-[#FACC15]"],
+body:not(.high-contrast-mode) .sky-theme [class*="text-[#22D3EE]"] {
+  color: #0369a1 !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="border-[#00FFFF]"],
+body:not(.high-contrast-mode) .sky-theme [class*="border-[#1E3A5F]"],
+body:not(.high-contrast-mode) .sky-theme [class*="border-[#334E68]"] {
+  border-color: #7dd3fc !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#0B192C]"] .text-slate-200,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#0B192C]"] .text-slate-300,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#070F1E]"] .text-slate-200,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#070F1E]"] .text-slate-300,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#112240]"] .text-slate-200,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#112240]"] .text-slate-300,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#1B3A60]"] .text-slate-200,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-[#1B3A60]"] .text-slate-300 {
+  color: #0c4a6e !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="bg-slate-800"],
+body:not(.high-contrast-mode) .sky-theme [class*="bg-slate-900"] {
+  background-color: #e0f2fe !important;
+  color: #0c4a6e !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme [class*="bg-slate-800"] .text-white,
+body:not(.high-contrast-mode) .sky-theme [class*="bg-slate-900"] .text-white {
+  color: #0c4a6e !important;
+}
+
+/* Superficies oscuras inline del carrito y del resumen de compra. */
+body:not(.high-contrast-mode) .checkout-light [style*="rgb(11, 25, 44)"],
+body:not(.high-contrast-mode) .checkout-light [style*="rgb(7, 15, 30)"],
+body:not(.high-contrast-mode) .checkout-light [style*="rgb(17, 34, 64)"] {
+  background-color: #ffffff !important;
+  border-color: #7dd3fc !important;
+  color: #0c4a6e !important;
+}
+
+body:not(.high-contrast-mode) .checkout-light [style*="rgb(7, 15, 30)"],
+body:not(.high-contrast-mode) .checkout-light [style*="rgb(17, 34, 64)"] {
+  background-color: #f0f9ff !important;
+}
+
+body:not(.high-contrast-mode) .checkout-light [class*="text-white"],
+body:not(.high-contrast-mode) .checkout-light [class*="text-slate-200"],
+body:not(.high-contrast-mode) .checkout-light [class*="text-slate-300"],
+body:not(.high-contrast-mode) .checkout-light [class*="text-slate-400"] {
+  color: #334155 !important;
+}
+
+body:not(.high-contrast-mode) .checkout-light button[class*="bg-"] {
+  color: #ffffff !important;
+}
+
+body:not(.high-contrast-mode) .checkout-light button[class*="bg-"] [class*="text-white"] {
+  color: #ffffff !important;
+}
+
+body:not(.high-contrast-mode) .checkout-light input,
+body:not(.high-contrast-mode) .checkout-light textarea,
+body:not(.high-contrast-mode) .checkout-light select {
+  background-color: #ffffff !important;
+  border-color: #7dd3fc !important;
+  color: #0f172a !important;
+}
+
+body:not(.high-contrast-mode) .sky-theme .bg-gradient-to-r {
+  background-image: linear-gradient(to right, #0284c7, #38bdf8) !important;
+}
+
+/* COLORES DEL LOGIN ADMINISTRATIVO: modifica esta sección para cambiar su tema claro. */
+.admin-auth-card input,
+.admin-auth-card select,
+.admin-auth-card textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.admin-auth-card label {
+  color: #334155 !important;
+}
+
+.admin-auth-card .text-slate-300,
+.admin-auth-card .text-slate-400 {
+  color: #64748b !important;
+}
+
+@layer base {
+  /* COLOR GLOBAL DE LA PÁGINA: fondo y color de texto base. */
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Atkinson Hyperlegible Next', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f0f9ff;
+    color: #0F172A;
+  }
+}
+
+/* ==========================================================================
+   SISTEMA DE LENTE DE ENFOQUE PROFUNDO Y RESALTADO VISUAL (WCAG 2.1 AAA)
+   Sincronizado en tiempo real con la navegación asistida por voz y teclado
+   Tema Claro: Azul Cobalto #2563EB – máxima visibilidad sobre fondos blancos
+   ========================================================================== */
+
+/* 1. Elimina el borde de enfoque predeterminado del navegador */
+*:focus {
+  outline: none;
+}
+
+/* 2. Estilo del Elemento Enfocado por Teclado (:focus-visible) y Voz:
+   Borde azul cobalto 3px, perfectamente visible sobre fondos claros */
+:focus-visible,
+[data-voice-focused="true"] {
+  outline: 3px solid #2563EB !important;
+  outline-offset: 3px !important;
+}
+
+/* 3. Elementos interactivos enfocados: borde cobalto nítido con respuesta inmediata */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[role="link"]:focus-visible,
+[role="tab"]:focus-visible,
+[role="checkbox"]:focus-visible,
+[role="radio"]:focus-visible,
+[role="switch"]:focus-visible,
+summary:focus-visible,
+article.interactive-card:focus-visible,
+.interactive-card:focus-visible,
+[tabindex="0"]:focus-visible,
+a[data-voice-focused="true"],
+button[data-voice-focused="true"],
+input[data-voice-focused="true"],
+select[data-voice-focused="true"],
+textarea[data-voice-focused="true"],
+[role="button"][data-voice-focused="true"],
+[role="link"][data-voice-focused="true"],
+[role="tab"][data-voice-focused="true"],
+article.interactive-card[data-voice-focused="true"],
+.interactive-card[data-voice-focused="true"],
+[tabindex="0"][data-voice-focused="true"] {
+  outline: 3px solid #2563EB !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* Tarjetas de producto enfocadas reciben borde vibrante adicional */
+article.interactive-card:focus-visible,
+article.interactive-card[data-voice-focused="true"] {
+  border-color: #4F46E5 !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.25), 0 8px 24px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Campos de entrada enfocados: fondo blanco, texto oscuro, borde azul cobalto */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+input[data-voice-focused="true"],
+select[data-voice-focused="true"],
+textarea[data-voice-focused="true"] {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #2563EB !important;
+  caret-color: #4F46E5 !important;
+}
+
+/* Skip link for assistive keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  z-index: 100;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 1rem;
+  left: 1rem;
+  background-color: #1E293B !important;
+  color: #FFFFFF !important;
+  padding: 0.85rem 1.75rem;
+  font-weight: 900;
+  font-size: 1rem;
+  border: 3px solid #2563EB !important;
+  border-radius: 8px;
+  outline: 3px solid #2563EB !important;
+  outline-offset: 3px !important;
+  z-index: 9999;
+}
+
+/* Strict High Contrast Mode (Negro #000000 + Amarillo #FFFF00 + Enfoque Azul Cobalto #0055FF 3px) */
+.high-contrast-mode {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+.high-contrast-mode body,
+.high-contrast-mode main,
+.high-contrast-mode header,
+.high-contrast-mode nav,
+.high-contrast-mode footer,
+.high-contrast-mode section,
+.high-contrast-mode aside:not(.a11y-exempt),
+.high-contrast-mode article,
+.high-contrast-mode div:not(.a11y-exempt),
+.high-contrast-mode ul,
+.high-contrast-mode li,
+.high-contrast-mode dl,
+.high-contrast-mode dt,
+.high-contrast-mode dd {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+.high-contrast-mode h1,
+.high-contrast-mode h2,
+.high-contrast-mode h3,
+.high-contrast-mode h4,
+.high-contrast-mode p,
+.high-contrast-mode span:not(.a11y-exempt),
+.high-contrast-mode strong,
+.high-contrast-mode label,
+.high-contrast-mode legend,
+.high-contrast-mode kbd:not(.a11y-exempt) {
+  color: #ffff00 !important;
+}
+
+.high-contrast-mode a:not(.a11y-exempt),
+.high-contrast-mode button:not(.a11y-exempt) {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+.high-contrast-mode a:not(.a11y-exempt):hover,
+.high-contrast-mode button:not(.a11y-exempt):hover {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+.high-contrast-mode input,
+.high-contrast-mode select,
+.high-contrast-mode textarea {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* Bordes de enfoque en azul cobalto (#0055FF) de 3px en Alto Contraste */
+.high-contrast-mode :focus-visible {
+  outline: 3px solid #0055FF !important;
+  outline-offset: 3px !important;
+}
+
+.high-contrast-mode img {
+  filter: grayscale(100%) contrast(150%) !important;
+}
+
+/* Grayscale Mode (Escala de Grises) */
+.grayscale-mode {
+  filter: grayscale(100%) !important;
+}
+
+.grayscale-mode .a11y-widget-exempt,
+.grayscale-mode .a11y-exempt {
+  filter: none !important;
+}
+
+/* Resaltar Enlaces y Botones Interactivos (Fondo azul tenue + subrayado grueso) */
+.highlight-links-mode a:not(.a11y-exempt),
+.highlight-links-mode button:not(.a11y-exempt),
+.highlight-links-mode [role="button"]:not(.a11y-exempt) {
+  background-color: #DBEAFE !important;
+  color: #1E3A8A !important;
+  text-decoration: underline 3px solid #1D4ED8 !important;
+  text-underline-offset: 3px !important;
+  font-weight: 700 !important;
+  border-color: #2563EB !important;
+}
+
+.highlight-links-mode a:not(.a11y-exempt) *,
+.highlight-links-mode button:not(.a11y-exempt) *,
+.highlight-links-mode [role="button"]:not(.a11y-exempt) * {
+  color: #1E3A8A !important;
+}
+
+/* Espaciado de Texto (Dyslexia-friendly letter & line spacing) */
+.dyslexia-spacing-mode,
+.dyslexia-spacing-mode p,
+.dyslexia-spacing-mode span,
+.dyslexia-spacing-mode h1,
+.dyslexia-spacing-mode h2,
+.dyslexia-spacing-mode h3,
+.dyslexia-spacing-mode h4,
+.dyslexia-spacing-mode h5,
+.dyslexia-spacing-mode h6,
+.dyslexia-spacing-mode a,
+.dyslexia-spacing-mode button,
+.dyslexia-spacing-mode li,
+.dyslexia-spacing-mode label,
+.dyslexia-spacing-mode input,
+.dyslexia-spacing-mode textarea,
+.dyslexia-spacing-mode dt,
+.dyslexia-spacing-mode dd {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.18em !important;
+  line-height: 1.85 !important;
+}
+
+/* Ocultar Imágenes para evitar sobrecarga o distracciones visuales */
+.hide-images-mode img:not(.a11y-exempt) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.hide-images-mode .product-image-container:not(.a11y-exempt) {
+  background-color: #E2E8F0 !important;
+  position: relative !important;
+}
+.hide-images-mode .product-image-container:not(.a11y-exempt)::after {
+  content: "🖼️ [Imagen Desactivada]";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+/* Detener Animaciones y Transiciones */
+.stop-animations-mode,
+.stop-animations-mode *,
+.stop-animations-mode *::before,
+.stop-animations-mode *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* Cursor Grande (44px SVG Accessible High-Visibility Cursor) */
+.large-cursor-mode,
+.large-cursor-mode * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 32 32'%3E%3Cpath d='M4 2 L22 20 L14 20 L18 29 L14 31 L10 22 L4 28 Z' fill='%231E293B' stroke='%23FFFFFF' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto !important;
+}
+
+.large-cursor-mode a,
+.large-cursor-mode button,
+.large-cursor-mode [role="button"],
+.large-cursor-mode input,
+.large-cursor-mode select {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 32 32'%3E%3Cpath d='M4 2 L22 20 L14 20 L18 29 L14 31 L10 22 L4 28 Z' fill='%234F46E5' stroke='%23FFFFFF' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, pointer !important;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "SoftTech Market",
+  "description": "Plataforma de comercio electrónico y soluciones asistivas certificadas con estricto cumplimiento WCAG 2.1 AAA.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

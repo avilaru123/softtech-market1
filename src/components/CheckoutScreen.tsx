@@ -10,13 +10,6 @@ interface CheckoutScreenProps {
   onRemoveItem: (productId: string) => void;
   onClearCart: () => void;
   onNavigate: (screen: Screen) => void;
-  onCompleteOrder: (orderData: {
-    orderNumber: string;
-    customerName: string;
-    customerEmail: string;
-    totalAmount: string;
-    itemCount: number;
-  }) => void;
   isLoggedIn?: boolean;
   currentUser?: UserSession | null;
   onLoginSuccess?: (user: UserSession) => void;
@@ -28,7 +21,6 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
   onRemoveItem,
   onClearCart,
   onNavigate,
-  onCompleteOrder,
   isLoggedIn = false,
   currentUser = null,
   onLoginSuccess,
@@ -41,9 +33,9 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
   const [customerAddress, setCustomerAddress] = useState('Calle Gran Vía 42, 3º B, 28013 Madrid');
   const [customerPhone, setCustomerPhone] = useState('+34 654 321 098');
   const [deliveryNotes, setDeliveryNotes] = useState('Avisar por mensaje de texto 15 minutos antes de la entrega.');
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'transfer' | 'ceapat'>('card');
   const [termsAccepted, setTermsAccepted] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   // Sync user data whenever currentUser updates
   useEffect(() => {
@@ -131,28 +123,23 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
       return;
     }
 
+    setCheckoutError(null);
     setIsProcessing(true);
-    announce('Guardando el pedido. El pago quedará pendiente en esta versión.', 'polite');
+    announce('Conectando con Mercado Pago para completar el pago.', 'polite');
     try {
-      const order = await api.createOrder({
+      const checkout = await api.createCheckout({
         customerName: customerName.trim() || 'Cliente SoftTech',
         customerEmail: customerEmail.trim() || 'cliente@softtech.es',
         address: customerAddress,
         phone: customerPhone,
         deliveryNotes,
-        paymentMethod,
         items: cartItems.map(({ product, quantity }) => ({ productId: product.id, quantity })),
       });
-      onCompleteOrder({
-        orderNumber: order.orderNumber,
-        customerName: order.customerName,
-        customerEmail: order.customerEmail,
-        totalAmount: formatPrice(order.totalAmount),
-        itemCount: order.itemCount,
-      });
-      announce(`Pedido #${order.orderNumber} guardado y pendiente de pago.`, 'assertive');
+      announce(`Pedido #${checkout.orderNumber} creado. Redirigiendo a Mercado Pago.`, 'polite');
+      window.location.assign(checkout.checkoutUrl);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'No se pudo guardar el pedido.';
+      setCheckoutError(message);
       announce(message, 'assertive');
     } finally {
       setIsProcessing(false);
@@ -772,76 +759,15 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
               />
             </div>
 
-            {/* Payment Method Selector */}
+            {/* Mercado Pago checkout */}
             <fieldset className="border-t border-[#1E3A5F] pt-3">
               <legend className="text-xs font-black uppercase tracking-wider text-slate-200 mb-2">
-                Método previsto de pago
+                Pago seguro
               </legend>
 
-              <div className="space-y-2.5 text-xs">
-                <label className="flex items-center gap-2.5 p-3 border-2 border-[#1E3A5F] rounded-xl cursor-pointer bg-[#070F1E] hover:border-[#00FFFF] has-checked:border-[#00FFFF] has-checked:bg-[#112240] transition-colors">
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="card"
-                    checked={paymentMethod === 'card'}
-                    onChange={() => setPaymentMethod('card')}
-                    aria-label="Opción interactiva: Tarjeta Bancaria Segura"
-                    data-speech="Opción interactiva: Tarjeta Bancaria Segura"
-                    className="accent-[#00FFFF] w-4 h-4 cursor-pointer"
-                  />
-                  <div className="flex-1 flex items-center justify-between">
-                    <span className="font-bold text-white">
-                      Tarjeta Bancaria Segura (Crédito / Débito)
-                    </span>
-                    <span className="material-symbols-outlined text-[20px] text-[#00FFFF]" aria-hidden="true">credit_card</span>
-                  </div>
-                </label>
-
-                {paymentMethod === 'card' && (
-                  <p role="status" className="p-3 bg-[#112240] border border-[#1E3A5F] rounded-xl text-xs text-slate-200">
-                    El pedido se registrará pendiente de pago. Los cobros con tarjeta aún no están configurados.
-                  </p>
-                )}
-
-                <label className="flex items-center gap-2.5 p-3 border-2 border-[#1E3A5F] rounded-xl cursor-pointer bg-[#070F1E] hover:border-[#00FFFF] has-checked:border-[#00FFFF] has-checked:bg-[#112240] transition-colors">
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="transfer"
-                    checked={paymentMethod === 'transfer'}
-                    onChange={() => setPaymentMethod('transfer')}
-                    aria-label="Opción interactiva: Transferencia Bancaria con Factura Proforma"
-                    data-speech="Opción interactiva: Transferencia Bancaria con Factura Proforma"
-                    className="accent-[#00FFFF] w-4 h-4 cursor-pointer"
-                  />
-                  <div className="flex-1 flex items-center justify-between">
-                    <span className="font-bold text-white">
-                      Transferencia Bancaria con Factura Proforma
-                    </span>
-                    <span className="material-symbols-outlined text-[20px] text-[#00FFFF]" aria-hidden="true">account_balance</span>
-                  </div>
-                </label>
-
-                <label className="flex items-center gap-2.5 p-3 border-2 border-[#1E3A5F] rounded-xl cursor-pointer bg-[#070F1E] hover:border-[#00FFFF] has-checked:border-[#00FFFF] has-checked:bg-[#112240] transition-colors">
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="ceapat"
-                    checked={paymentMethod === 'ceapat'}
-                    onChange={() => setPaymentMethod('ceapat')}
-                    aria-label="Opción interactiva: Ayudas Públicas y Tramitación CEAPAT Autonómica"
-                    data-speech="Opción interactiva: Ayudas Públicas y Tramitación CEAPAT Autonómica"
-                    className="accent-[#00FFFF] w-4 h-4 cursor-pointer"
-                  />
-                  <div className="flex-1 flex items-center justify-between">
-                    <span className="font-bold text-white">
-                      Ayudas Públicas / Tramitación CEAPAT Autonómica
-                    </span>
-                    <span className="material-symbols-outlined text-[20px] text-[#FACC15]" aria-hidden="true">policy</span>
-                  </div>
-                </label>
-              </div>
+              <p role="status" className="p-3 bg-[#112240] border border-[#1E3A5F] rounded-xl text-xs text-slate-200">
+                Pagarás de forma segura en Mercado Pago con los medios habilitados para tu cuenta. SoftTech Market no recibe ni almacena datos de tarjetas.
+              </p>
             </fieldset>
 
             {/* Terms checkbox */}
@@ -861,12 +787,18 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
               </label>
             </div>
 
+            {checkoutError && (
+              <p role="alert" className="p-3 bg-red-950 border-2 border-red-400 rounded-xl text-sm text-red-100">
+                No se pudo iniciar el pago: {checkoutError}
+              </p>
+            )}
+
             {/* Submit button */}
             <button
               type="submit"
               disabled={isProcessing || cartItems.length === 0}
-              aria-label={`Botón: Registrar pedido por ${formatPrice(subtotal)}`}
-              data-speech={`Botón: Registrar pedido por ${formatPrice(subtotal)}`}
+              aria-label={`Botón: Pagar ${formatPrice(subtotal)} con Mercado Pago`}
+              data-speech={`Botón: Pagar ${formatPrice(subtotal)} con Mercado Pago`}
               style={{
                 backgroundColor: '#FACC15',
                 color: '#0B192C',
@@ -878,8 +810,8 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
               <span className="material-symbols-outlined text-[22px]" aria-hidden="true">lock</span>
               <span>
                 {isProcessing
-                  ? 'Guardando pedido...'
-                  : `Registrar pedido ${formatPrice(subtotal)}`}
+                  ? 'Conectando con Mercado Pago...'
+                  : `Pagar ${formatPrice(subtotal)} con Mercado Pago`}
               </span>
             </button>
 

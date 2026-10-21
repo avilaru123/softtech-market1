@@ -1,7 +1,9 @@
 import { AdminCustomer, AdminOrder, Product, UserSession } from '../types';
 
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001/api').replace(/\/+$/, '');
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const response = await fetch(`/api${path}`, {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     credentials: 'include',
     headers: {
@@ -53,6 +55,28 @@ export const api = {
     totalAmount: number;
     itemCount: number;
   }>('/orders', { method: 'POST', body: JSON.stringify(data) }),
+  createCheckout: (data: {
+    customerName: string;
+    customerEmail: string;
+    address: string;
+    phone: string;
+    deliveryNotes: string;
+    items: { productId: string; quantity: number }[];
+  }) => request<{ orderNumber: string; checkoutUrl: string }>('/payments/checkout', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  paymentStatus: (orderNumber: string, paymentId: string | null) => {
+    const query = paymentId ? `?payment_id=${encodeURIComponent(paymentId)}` : '';
+    return request<{
+      orderNumber: string;
+      customerName: string;
+      customerEmail: string;
+      totalAmount: number;
+      itemCount: number;
+      paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
+    }>(`/payments/orders/${encodeURIComponent(orderNumber)}/status${query}`);
+  },
   adminOrders: () => request<AdminOrder[]>('/admin/orders'),
   adminCustomers: () => request<AdminCustomer[]>('/admin/customers'),
   addProduct: (product: Product) => request<Product>('/admin/products', {

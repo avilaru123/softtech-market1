@@ -136,6 +136,44 @@ function AppContent() {
     return () => { active = false; };
   }, []);
 
+  useEffect(() => {
+    if (!isSessionResolved) return;
+
+    const returnParams = new URLSearchParams(window.location.search);
+    if (returnParams.get('payment') !== 'return') return;
+
+    const orderNumber = returnParams.get('order');
+    const paymentId = returnParams.get('payment_id');
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.hash}`);
+
+    if (!isLoggedIn || !orderNumber) {
+      announce('No se pudo verificar el pago. Inicia sesión con la cuenta que realizó el pedido.', 'assertive');
+      return;
+    }
+
+    api.paymentStatus(orderNumber, paymentId)
+      .then((order) => {
+        if (order.paymentStatus === 'paid') {
+          setOrderConfirmation({
+            orderNumber: order.orderNumber,
+            customerName: order.customerName,
+            customerEmail: order.customerEmail,
+            totalAmount: formatCop(order.totalAmount),
+            itemCount: order.itemCount,
+          });
+          setCartItems([]);
+          announce(`Pago confirmado para el pedido #${order.orderNumber}.`, 'assertive');
+        } else if (order.paymentStatus === 'failed') {
+          announce(`El pago del pedido #${order.orderNumber} no fue aprobado. Puedes volver a intentarlo desde Mercado Pago.`, 'assertive');
+        } else {
+          announce(`El pedido #${order.orderNumber} sigue pendiente de confirmación de pago.`, 'assertive');
+        }
+      })
+      .catch((error: unknown) => {
+        announce(error instanceof Error ? error.message : 'No se pudo verificar el estado del pago.', 'assertive');
+      });
+  }, [announce, isLoggedIn, isSessionResolved]);
+
   const handleLogout = useCallback((reason: 'manual' | 'idle' | 'history-navigation' = 'manual') => {
     setIsLoggedIn(false);
     setCurrentUser(null);
@@ -473,10 +511,6 @@ function AppContent() {
               onClearCart={handleClearCart}
               onNavigate={(screen) => {
                 handleNavigation(screen);
-              }}
-              onCompleteOrder={(orderData) => {
-                setOrderConfirmation(orderData);
-                setCartItems([]);
               }}
               isLoggedIn={isLoggedIn}
               currentUser={currentUser}

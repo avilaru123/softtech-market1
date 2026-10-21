@@ -55,10 +55,21 @@ La tienda guarda sus datos en MySQL. Prisma crea las tablas y Express comunica l
    npm run db:migrate -- --name inicial
    npm run db:seed
    ```
-5. Abre dos terminales. En la primera ejecuta `npm run dev:api`; en la segunda, `npm run dev`. La tienda queda en `http://localhost:3000`.
+5. Abre dos terminales. En la primera ejecuta `npm run dev:api`; en la segunda, `npm run dev`. La tienda queda en `http://localhost:3000` y el cliente se conecta directamente a `http://localhost:3001/api`. Si la API está en otra dirección, define `VITE_API_BASE_URL` (incluyendo `/api`) antes de iniciar Vite. En producción, `APP_URL` debe coincidir con el origen de la tienda para permitir las solicitudes con sesión; en desarrollo se permite además `http://localhost:3000`.
 6. En MySQL Workbench, actualiza el panel de esquemas para ver las tablas y los productos cargados.
 
-Los pedidos se guardan con pago pendiente. Para cobrar de verdad hace falta integrar un proveedor de pagos; la aplicación no guarda números ni códigos de tarjetas.
+### Probar pagos con Mercado Pago
+
+El checkout usa **Mercado Pago Checkout Pro**. Configura en `.env`:
+
+- `MP_ACCESS_TOKEN`: token de prueba de una cuenta vendedora de Mercado Pago (no lo incluyas en el frontend ni lo subas al repositorio).
+- `MP_WEBHOOK_SECRET`: clave secreta de la notificación webhook de Mercado Pago para validar su firma.
+- `MP_ENVIRONMENT=sandbox` para pruebas; usa `production` y credenciales productivas solo al publicar.
+- `APP_URL`: origen HTTPS público de la tienda y de `/api`. Para desarrollo local, expón Vite (puerto 3000, que reenvía `/api` al backend) mediante un túnel HTTPS y configura aquí el origen del túnel. `http://localhost` no es accesible desde Mercado Pago y no se acepta para iniciar el checkout.
+
+En la aplicación de Mercado Pago configura una notificación de tipo **Payments** apuntando a `{APP_URL}/api/payments/webhook`, copia la clave de firma que genera Mercado Pago en `MP_WEBHOOK_SECRET` y reinicia la API. El checkout no se inicia si falta esta clave o `APP_URL` no es HTTPS. El comprador regresa a la tienda con una referencia de pedido; la app consulta el pago a Mercado Pago y solo confirma el pedido cuando su estado es `approved`. El backend verifica además la firma del webhook, importe, moneda y referencia del pedido. Los datos de tarjetas se capturan exclusivamente en Mercado Pago.
+
+Inicia la base de datos/MySQL, `npm run dev:api` y `npm run dev` como en los pasos anteriores. Usa las credenciales de comprador de prueba de Mercado Pago al verificar el flujo en sandbox. Para cobros reales configura la URL pública HTTPS, webhook y credenciales productivas antes de cambiar `MP_ENVIRONMENT` a `production`.
 
 ---
 
